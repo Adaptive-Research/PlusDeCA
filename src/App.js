@@ -15,8 +15,7 @@ function App() {
 
 
         <Routes>
-          <Route path="/Network/build" element={<HomePage/>}/>  {/*  pour npm start */}
-          <Route path="/Network/build/index.html" element={<HomePage/>}/>  {/*  pour le site web  */}
+          <Route path="/" element={<HomePage/>}/>  {/*  pour npm start */}
           <Route path="*" element={<UnknownMsgPage/>}/>
         </Routes>
       
