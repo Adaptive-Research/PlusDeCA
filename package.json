@@ -2,7 +2,6 @@
   "name": "stats",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://wp.test/Network/build",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,6 +13,7 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-minimal-side-navigation": "^1.9.2",
+    "react-router": "^6.4.1",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-socks": "^2.2.0",
