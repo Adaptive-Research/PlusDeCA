@@ -1,0 +1,19 @@
+.content-container {
+    padding: 1%;
+    height: 100vh;
+    background-color: white;
+    font-size: 12px;
+}
+
+.row {
+    display: flex;
+    height: 100%;
+}
+
+.left-panel {
+    flex: 2;
+}.middle-panel {
+    flex: 10;
+}.right-panel {
+    flex: 2;
+}
