@@ -22,7 +22,7 @@ export default function HomePage() {
         {/*setLoading(true);*/}
 
         const fetchData = async () => {
-            const response = await fetch('http://API.test:8001/API/Show-Compte-Utilisateur') ;
+            const response = await fetch('http://78.249.128.56:8001/API/Show-Compte-Utilisateur') ;
             const newData = await response.json();
             setData(newData);
             setDebugString(JSON.stringify(data, null, 2));
