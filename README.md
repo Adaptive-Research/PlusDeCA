@@ -12,4 +12,23 @@ Pour faire croître son chiffre d'affaires, une société doit multiplier les re
 
 ## Installation
 
-## Usage
+Pour installer le projet, il faut d'abord installer les dépendances:
+
+```bash
+npm install
+```
+
+Ensuite, il faut lancer le serveur de développement:
+
+```bash
+npm run dev
+```
+
+### Production 
+
+Pour voir le site en production il faut se rendre sur l'addresse suivante: 
+
+[https://plusdeca.fr](https://plusdeca.fr)
+
+## License
+
