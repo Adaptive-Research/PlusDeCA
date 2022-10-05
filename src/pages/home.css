@@ -12,8 +12,12 @@
 
 .left-panel {
     flex: 2;
-}.middle-panel {
+}
+
+.middle-panel {
     flex: 10;
-}.right-panel {
+}
+
+.right-panel {
     flex: 2;
 }

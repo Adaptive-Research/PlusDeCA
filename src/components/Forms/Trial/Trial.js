@@ -73,7 +73,8 @@ export function Trial() {
                     }}>
                         Create
                     </Button>
-                    <Link className="d-block mt-3 mb-3 text-decoration-none" to="/Quizreo_frontend/build/dashboard">Abort</Link>
+                    <Link className="d-block mt-3 mb-3 text-decoration-none"
+                          to="/Quizreo_frontend/build/dashboard">Abort</Link>
                 </Form>
             </div>
         </div>

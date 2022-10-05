@@ -5,16 +5,10 @@ import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import {useLocation, useNavigate} from "react-router-dom";
 
 
-
-
-
-
-
 export function Sidebar(props) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    
 
     return (
         <div className="container-fluid">
@@ -80,7 +74,7 @@ export function Sidebar(props) {
                             }
                         ]
                     },
-                    
+
                     {
                         title: 'Mes services',
                         itemId: '/share',
