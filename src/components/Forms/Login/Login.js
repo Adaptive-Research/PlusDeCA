@@ -6,7 +6,7 @@ import {useNavigate} from "react-router";
 import axios from 'axios';
 
 export function Login() {
-    const [token, setToken] = useState([]);
+    let [token, setToken] = useState([]);
     const [redStyle, setRedStyle] = useState("");
     const [UsrMsg, setUsrMsg] = useState("We'll never share your email with anyone else.");
     const [passMsg, setPassMsg] = useState("We'll never share your password with anyone else.");
@@ -19,6 +19,7 @@ export function Login() {
 
 
     const checkEmail = (mail) => {
+        // Check if email is valid or not
         let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if (validRegex.test(mail)) {
             return true;
@@ -26,12 +27,11 @@ export function Login() {
         return false;
     }
 
-    const checkAUth = (mail, pass) => {
-        {/*launch a post request to check if user inputs are correects and store the given token to authenticate user*/
-        }
+    const checkAUth = async (mail, pass) => {
+     // Launch a post request to check if user inputs are correects and store the given token to create user
         const url = "http://78.249.128.56:8001/API/Login";
 
-        axios.post(url, {
+        const response = await axios.post(url, {
             Submit: 1,
             Email: mail,
             Password: pass
@@ -39,39 +39,41 @@ export function Login() {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             }
-        }).then(
-            (response) => {
-                console.log(response);
-                if () {
-                    setRedStyle("red");
-                    setUsrMsg("Wrong email or password");
-                    setPassMsg("Wrong email or password");
-                } else {
-                    token.push(response.data);
-                    console.log("User logged in", token);
-                    navigate("/dashboard");
-                }
+        })
+
+        if (response.data.includes("ERROR:")) {
+            console.log("Error found");
+            setRedStyle("red");
+            setUsrMsg("Wrong email or password");
+            setPassMsg("Wrong email or password");
+        } else {
+            console.log("User authenticated");
+
+            try {
+                let temp = response.data
+                setToken(elem => [token.push(temp)]);
+                localStorage.setItem('token', JSON.stringify(temp));
+            } catch (e) {
+                console.log(e);
+            } finally {
+                navigate('/dashboard');
             }
-        ).catch(
-            (error) => {
-                console.log(error);
-                setRedStyle("red");
-                setUsrMsg("Email or password is incorrect");
-                setPassMsg("Email or password is incorrect");
-            });
+        }
+
+
     }
 
     const handleSubmit = () => {
+        // Check if email and password are valid then launch request
         try {
             console.log(email, password);
             if (email.length === 0 || password.length === 0) {
                 setRedStyle("text-danger");
                 if (email.length === 0) {
                     setUsrMsg("Email is required");
-                }else if (!checkEmail(email)) {
+                } else if (!checkEmail(email)) {
                     setUsrMsg("Email is not valid");
-                }
-                else if (email.length !== 0) {
+                } else if (email.length !== 0) {
                     setUsrMsg("We'll never share your email with anyone else.");
                 }
                 if (password.length === 0) {
