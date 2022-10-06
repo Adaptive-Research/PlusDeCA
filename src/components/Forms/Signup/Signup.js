@@ -4,6 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {checkDuplicate, checkEmail, getAllUsers} from "../../../utils";
+import {decrypt, encrypt} from "../../../encrypt";
 
 export function Signup() {
     const [redStyle, setRedStyle] = React.useState("");
@@ -26,7 +27,7 @@ export function Signup() {
             const response = await axios.post(url, {
                 Submit: 1,
                 Email: mail,
-                Password: pass
+                Password: encrypt(pass)
             }, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -67,9 +68,11 @@ export function Signup() {
                     setPasswordMsg("");
                 }
             } else {
-                // checkCreate(email, password).then(r => {
-                //     console.log(r);
-                // });
+
+                console.log(encrypt(password));
+                checkCreate(email, password).then(r => {
+                    console.log(r);
+                });
             }
         } catch (e) {
             console.log(e);
