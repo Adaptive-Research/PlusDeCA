@@ -4,7 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from "axios";
-import {checkDuplicate, checkEmail, checkWordLength} from "../../../utils";
+import {checkDuplicate, checkEmail, checkWordLength, getAllUsers} from "../../../utils";
 
 export function Signup() {
     const [redStyle, setRedStyle] = React.useState("");
@@ -59,7 +59,7 @@ export function Signup() {
                     setEmailMsg("Email is required");
                 } else if (!checkEmail(email)) {
                     setEmailMsg("Email is not valid");
-                } else if (email.length !== 0) {
+                }else if (email.length !== 0) {
                     setEmailMsg("");
                 }
                 if (password.length === 0) {
@@ -70,7 +70,10 @@ export function Signup() {
                     setPasswordMsg("");
                 }
             } else {
-                console.log(checkDuplicate(email));
+                const test = checkDuplicate(email);
+                if (test === true) {
+                    setEmailMsg("Email is already used");
+                }
                 // checkCreate(email, password).then(r => {
                 //     console.log(r);
                 // });
