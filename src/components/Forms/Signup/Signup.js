@@ -4,6 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from "axios";
+import {checkDuplicate, checkEmail, checkWordLength} from "../../../utils";
 
 export function Signup() {
     const [redStyle, setRedStyle] = React.useState("");
@@ -16,42 +17,40 @@ export function Signup() {
         window.location.href = "https://plusdeca.fr";
     }
 
-    const checkEmail = (mail) => {
-        // Check if email is valid or not
-        let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (validRegex.test(mail)) {
-            return true;
-        }
-        return false;
-    }
 
     const checkCreate = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
         const url = "http://78.249.128.56:8001/API/Creer-Compte-Utilisateur";
-        const response = await axios.post(url, {
-            Submit: 1,
-            Email: mail,
-            Password: pass
-        }, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+
+
+        if (checkEmail(mail)) {
+            const response = await axios.post(url, {
+                Submit: 1,
+                Email: mail,
+                Password: pass
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            });
+
+            if (response.data.includes("ERROR:")) {
+                setRedStyle("red");
+                setEmailMsg("Wrong email or password");
+                setPasswordMsg("Wrong email or password");
+            } else {
+                console.log("User created");
+                console.log(response.data);
             }
-        });
 
-        if (response.data.includes("ERROR:")) {
-            setRedStyle("red");
-            setEmailMsg("Wrong email or password");
-            setPasswordMsg("Wrong email or password");
-        } else {
-            console.log("User created");
-            console.log(response.data);
         }
-
 
     }
 
     const handleSubmit = () => {
         // Check if email is valid
+
+
         try {
             if (email.length === 0 || password.length === 0) {
                 setRedStyle("text-danger");
@@ -61,15 +60,20 @@ export function Signup() {
                 } else if (!checkEmail(email)) {
                     setEmailMsg("Email is not valid");
                 } else if (email.length !== 0) {
-                    setEmailMsg("");
+                        setEmailMsg("");
                 }
                 if (password.length === 0) {
                     setPasswordMsg("Password is required");
+                } else if (!checkWordLength(password)) {
+                    setPasswordMsg("Password must be at least 8 characters long and contain at least one special character");
                 } else if (password.length !== 0) {
                     setPasswordMsg("");
                 }
             } else {
-                checkCreate(email, password);
+                console.log(checkDuplicate(email));
+                // checkCreate(email, password).then(r => {
+                //     console.log(r);
+                // });
             }
         } catch (e) {
             console.log(e);
