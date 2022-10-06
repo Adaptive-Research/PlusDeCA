@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const fin = [];
 
 const checkEmail = (mail) => {
     // Check if email is valid or not
@@ -25,9 +24,11 @@ const checkWordLength = (word) => {
 }
 
 
-const getAllUsers = async () => {
+const getAllUsers = async key => {
     const url = "http://78.249.128.56:8001/API/Show-Comptes-Utilisateur";
 
+
+    const fin = [];
 
     const response = await axios.get(url).then(
         (response) => {
@@ -39,16 +40,20 @@ const getAllUsers = async () => {
             });
         }
     )
-
-    console.log(fin);
+    localStorage.fin = JSON.stringify(fin);
+    return fin;
 };
 
 
 const checkDuplicate = (mail) => {
-    if (fin.includes(mail)) {
+
+    const newFin = JSON.parse(localStorage.fin);
+
+    if (newFin.includes(mail)) {
         return true;
+    }else {
+        return false;
     }
-    return false;
 }
 
 
