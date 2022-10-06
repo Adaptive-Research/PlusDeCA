@@ -4,7 +4,8 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
-import {checkEmail} from "../../../utils";
+import {checkDuplicate, checkEmail, getAllUsers} from "../../../utils";
+import {encrypt} from "../../../encrypt";
 
 export function Login() {
     let [token, setToken] = useState([]);
@@ -18,6 +19,7 @@ export function Login() {
         window.location.href = "https://plusdeca.fr";
     }
 
+    getAllUsers();
 
     const checkAUth = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
@@ -35,7 +37,7 @@ export function Login() {
             })
 
             if (response.data.includes("ERROR:")) {
-                console.log("Error found");
+                console.log(`Error found: ${response.data}`);
                 setRedStyle("red");
                 setUsrMsg("Wrong email or password");
                 setPassMsg("Wrong email or password");
@@ -68,7 +70,12 @@ export function Login() {
                 } else if (!checkEmail(email)) {
                     setUsrMsg("Email is not valid");
                 } else if (email.length !== 0) {
-                    setUsrMsg("We'll never share your email with anyone else.");
+                    const test = checkDuplicate(email);
+                    if (test === false) {
+                        setUsrMsg("Bad email address");
+                    }else {
+                        setUsrMsg("We'll never share your email with anyone else.");
+                    }
                 }
                 if (password.length === 0) {
                     setPassMsg("Password is required");
@@ -76,7 +83,7 @@ export function Login() {
                     setPassMsg("We'll never share your password with anyone else.");
                 }
             } else {
-                checkAUth(email, password);
+                checkAUth(email, encrypt(password));
             }
         } catch (e) {
             console.log(e);
