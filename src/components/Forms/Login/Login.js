@@ -4,6 +4,8 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
+import {encrypt, decrypt} from "../../../encrypt";
+import {checkEmail, checkWordLength} from "../../../utils";
 
 export function Login() {
     let [token, setToken] = useState([]);
@@ -18,45 +20,39 @@ export function Login() {
     }
 
 
-    const checkEmail = (mail) => {
-        // Check if email is valid or not
-        let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (validRegex.test(mail)) {
-            return true;
-        }
-        return false;
-    }
 
     const checkAUth = async (mail, pass) => {
      // Launch a post request to check if user inputs are correects and store the given token to create user
         const url = "http://78.249.128.56:8001/API/Login";
 
-        const response = await axios.post(url, {
-            Submit: 1,
-            Email: mail,
-            Password: pass
-        }, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        })
+        if (checkEmail(mail)) {
+            const response = await axios.post(url, {
+                Submit: 1,
+                Email: mail,
+                Password: pass
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
 
-        if (response.data.includes("ERROR:")) {
-            console.log("Error found");
-            setRedStyle("red");
-            setUsrMsg("Wrong email or password");
-            setPassMsg("Wrong email or password");
-        } else {
-            console.log("User authenticated");
+            if (response.data.includes("ERROR:")) {
+                console.log("Error found");
+                setRedStyle("red");
+                setUsrMsg("Wrong email or password");
+                setPassMsg("Wrong email or password");
+            } else {
+                console.log("User authenticated");
 
-            try {
-                let temp = response.data
-                setToken(elem => [token.push(temp)]);
-                localStorage.setItem('token', JSON.stringify(temp));
-            } catch (e) {
-                console.log(e);
-            } finally {
-                navigate('/dashboard');
+                try {
+                    let temp = response.data
+                    setToken(elem => [token.push(temp)]);
+                    localStorage.setItem('token', JSON.stringify(temp));
+                } catch (e) {
+                    console.log(e);
+                } finally {
+                    navigate('/dashboard');
+                }
             }
         }
 
@@ -78,7 +74,8 @@ export function Login() {
                 }
                 if (password.length === 0) {
                     setPassMsg("Password is required");
-                } else if (password.length !== 0) {
+                }
+                else if (password.length !== 0) {
                     setPassMsg("We'll never share your password with anyone else.");
                 }
             } else {
