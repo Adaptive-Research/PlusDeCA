@@ -4,8 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
-import {encrypt, decrypt} from "../../../encrypt";
-import {checkEmail, checkWordLength} from "../../../utils";
+import {checkEmail} from "../../../utils";
 
 export function Login() {
     let [token, setToken] = useState([]);
@@ -20,9 +19,8 @@ export function Login() {
     }
 
 
-
     const checkAUth = async (mail, pass) => {
-     // Launch a post request to check if user inputs are correects and store the given token to create user
+        // Launch a post request to check if user inputs are correects and store the given token to create user
         const url = "http://78.249.128.56:8001/API/Login";
 
         if (checkEmail(mail)) {
@@ -74,8 +72,7 @@ export function Login() {
                 }
                 if (password.length === 0) {
                     setPassMsg("Password is required");
-                }
-                else if (password.length !== 0) {
+                } else if (password.length !== 0) {
                     setPassMsg("We'll never share your password with anyone else.");
                 }
             } else {

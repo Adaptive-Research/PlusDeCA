@@ -29,12 +29,11 @@ const getAllUsers = async () => {
     const url = "http://78.249.128.56:8001/API/Show-Comptes-Utilisateur";
 
 
-
     const response = await axios.get(url).then(
         (response) => {
             const data = response.data;
             data.forEach((element) => {
-                if (!fin.includes(element.Email)){
+                if (!fin.includes(element.Email)) {
                     fin.push(element.Email);
                 }
             });

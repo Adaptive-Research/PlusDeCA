@@ -60,7 +60,7 @@ export function Signup() {
                 } else if (!checkEmail(email)) {
                     setEmailMsg("Email is not valid");
                 } else if (email.length !== 0) {
-                        setEmailMsg("");
+                    setEmailMsg("");
                 }
                 if (password.length === 0) {
                     setPasswordMsg("Password is required");
