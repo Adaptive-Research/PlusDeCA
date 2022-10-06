@@ -62,10 +62,8 @@ export function Signup() {
                 }else if (email.length !== 0) {
                     setEmailMsg("");
                 }
-                if (password.length === 0) {
-                    setPasswordMsg("Password is required");
-                } else if (!checkWordLength(password)) {
-                    setPasswordMsg("Password must be at least 8 characters long and contain at least one special character");
+                if (password.length < 8) {
+                    setPasswordMsg("Password must be at least 8 characters long");
                 } else if (password.length !== 0) {
                     setPasswordMsg("");
                 }
@@ -73,6 +71,8 @@ export function Signup() {
                 const test = checkDuplicate(email);
                 if (test === true) {
                     setEmailMsg("Email is already used");
+                } else{
+                    setEmailMsg("");
                 }
                 // checkCreate(email, password).then(r => {
                 //     console.log(r);
