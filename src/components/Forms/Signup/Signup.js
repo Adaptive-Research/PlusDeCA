@@ -23,7 +23,7 @@ export function Signup() {
 
     const checkCreate = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
-        const url = "http://78.249.128.56:8001/API/Creer-Compte-Utilisateur";
+        const url = process.env.API_SIGNUP_URL;
 
 
         if (checkEmail(mail)) {
