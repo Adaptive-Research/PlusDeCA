@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {checkDuplicate, checkEmail, getAllUsers} from "../../../utils";
-import {decrypt, encrypt} from "../../../encrypt";
+import {checkDuplicate, checkEmail, getAllUsersEmail} from "../../../utils";
+import {encrypt} from "../../../encrypt";
 
 export function Signup() {
     const [redStyle, setRedStyle] = React.useState("");
@@ -16,7 +16,7 @@ export function Signup() {
         window.location.href = "https://plusdeca.fr";
     }
 
-    getAllUsers();
+    getAllUsersEmail();
 
     const checkCreate = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
@@ -47,33 +47,38 @@ export function Signup() {
 
     }
 
+
+    const basicRegister = (email, password) => {
+        let checkMail;
+        let checkPass;
+
+        if (!checkEmail(email)) {
+            setEmailMsg("Email is required and must be valid");
+            checkMail = false;
+        } else if (email.length !== 0 && checkEmail(email) && !checkDuplicate(email)) {
+            setEmailMsg("");
+            checkMail = true;
+        } else if (checkDuplicate(email)) {
+            setEmailMsg("Email is already used");
+            checkMail = false;
+        }
+        if (password.length < 8) {
+            setPasswordMsg("Password must be at least 8 characters long");
+            checkPass = false;
+        } else {
+            setPasswordMsg("");
+            checkPass = true;
+        }
+
+        if (checkMail && checkPass) {
+            checkCreate(email, password);
+        }
+    }
+
+
     const handleSubmit = () => {
         try {
-            if (email.length === 0 || password.length === 0) {
-                setRedStyle("text-danger");
-
-                if (!checkEmail(email)) {
-                    setEmailMsg("Email is required and must be valid");
-                } else if (email.length !== 0 && checkEmail(email)) {
-                    const test = checkDuplicate(email);
-                    if (test === true) {
-                        setEmailMsg("Email is already used");
-                    } else {
-                        setEmailMsg("");
-                    }
-                }
-                if (password.length < 8) {
-                    setPasswordMsg("Password must be at least 8 characters long");
-                } else if (password.length !== 0) {
-                    setPasswordMsg("");
-                }
-            } else {
-
-                console.log(encrypt(password));
-                checkCreate(email, password).then(r => {
-                    console.log(r);
-                });
-            }
+            basicRegister(email, password);
         } catch (e) {
             console.log(e);
         } finally {
