@@ -3,10 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import {StatusMsg} from "../../status";
 import {checkDuplicate, checkEmail, getAllUsersEmail} from "../../../utils";
 import {encrypt} from "../../../encrypt";
 
 export function Signup() {
+    const [statusResponse, setStatus] = React.useState("");
+    const [statusColor, setColor] = React.useState("");
     const [redStyle, setRedStyle] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -38,9 +41,15 @@ export function Signup() {
                 setRedStyle("red");
                 setEmailMsg("Wrong email or password");
                 setPasswordMsg("Wrong email or password");
+                setColor("alert alert-danger");
+                setStatus(`${response.data}`);
+
             } else {
                 console.log("User created");
                 console.log(response.data);
+                setColor("alert alert-success");
+                setStatus("User account created");
+
             }
 
         }
@@ -86,9 +95,12 @@ export function Signup() {
         }
     }
 
+
+
     return (
         <div className="container-fluid">
             <div className="row">
+                <StatusMsg color={statusColor} message={statusResponse} />
                 <Form className="mx-auto col-md-4 shadow"
                       style={{backgroundColor: "#D9D9D9", marginTop: "100px", marginBottom: "100px"}}>
                     <h4 className="text-center fw-semibold mt-3 mb-3" style={{cursor: "Pointer"}}
