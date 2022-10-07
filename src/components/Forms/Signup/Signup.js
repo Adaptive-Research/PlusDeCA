@@ -96,11 +96,10 @@ export function Signup() {
     }
 
 
-
     return (
         <div className="container-fluid">
             <div className="row">
-                <StatusMsg color={statusColor} message={statusResponse} />
+                <StatusMsg color={statusColor} message={statusResponse}/>
                 <Form className="mx-auto col-md-4 shadow"
                       style={{backgroundColor: "#D9D9D9", marginTop: "100px", marginBottom: "100px"}}>
                     <h4 className="text-center fw-semibold mt-3 mb-3" style={{cursor: "Pointer"}}
