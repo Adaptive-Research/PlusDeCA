@@ -4,7 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
-import {checkDuplicate, checkEmail, getAllUsers} from "../../../utils";
+import {checkDuplicate, checkEmail,getAllUsersEmail} from "../../../utils";
 import {encrypt} from "../../../encrypt";
 
 export function Login() {
@@ -19,7 +19,7 @@ export function Login() {
         window.location.href = "https://plusdeca.fr";
     }
 
-    getAllUsers();
+    getAllUsersEmail();
 
     const checkAUth = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
@@ -59,36 +59,46 @@ export function Login() {
 
     }
 
+    const basicCheck = (email, password) => {
+        let Mailcheck;
+        let Passwordcheck;
+        if (email.length === 0) {
+            setUsrMsg("Email is required");
+            Mailcheck = false;
+        } else if (!checkEmail(email)) {
+            setUsrMsg("Email is not valid");
+            Mailcheck = false;
+        } else if (email.length !== 0) {
+            const test = checkDuplicate(email);
+            if (test === false) {
+                setUsrMsg("Bad email address");
+                Mailcheck = false;
+            } else {
+                Mailcheck = true;
+                setUsrMsg("");
+            }
+        }
+        if (password.length < 8) {
+            setPassMsg("Password is required and must be at least 8 characters");
+            Passwordcheck = false;
+        } else {
+            setPassMsg("");
+            Passwordcheck = true;
+        }
+        if (Mailcheck && Passwordcheck) {
+            checkAUth(email, encrypt(password)).then(r => console.log(r));
+        }
+    }
+
     const handleSubmit = () => {
         // Check if email and password are valid then launch request
         try {
-            console.log(email, password);
-            if (email.length === 0 || password.length === 0) {
-                setRedStyle("text-danger");
-                if (email.length === 0) {
-                    setUsrMsg("Email is required");
-                } else if (!checkEmail(email)) {
-                    setUsrMsg("Email is not valid");
-                } else if (email.length !== 0) {
-                    const test = checkDuplicate(email);
-                    if (test === false) {
-                        setUsrMsg("Bad email address");
-                    }else {
-                        setUsrMsg("We'll never share your email with anyone else.");
-                    }
-                }
-                if (password.length === 0) {
-                    setPassMsg("Password is required");
-                } else if (password.length !== 0) {
-                    setPassMsg("We'll never share your password with anyone else.");
-                }
-            } else {
-                checkAUth(email, encrypt(password));
-            }
+            basicCheck(email, password);
+
         } catch (e) {
             console.log(e);
         } finally {
-            console.log(email, password);
+            console.log(email, encrypt(password));
         }
     }
 
