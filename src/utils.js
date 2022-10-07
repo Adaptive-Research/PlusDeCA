@@ -1,5 +1,4 @@
 import axios from "axios";
-import {decrypt} from "./encrypt";
 
 
 const checkEmail = (mail) => {
@@ -52,13 +51,10 @@ const checkDuplicate = (mail) => {
 
     if (newEmails.includes(mail)) {
         return true;
-    }else {
+    } else {
         return false;
     }
 }
-
-
-
 
 
 export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate};

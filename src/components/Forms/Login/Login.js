@@ -4,7 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
-import {checkDuplicate, checkEmail,getAllUsersEmail} from "../../../utils";
+import {checkDuplicate, checkEmail, getAllUsersEmail} from "../../../utils";
 import {encrypt} from "../../../encrypt";
 
 export function Login() {
