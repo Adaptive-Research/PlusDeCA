@@ -1,4 +1,5 @@
 import axios from "axios";
+import {decrypt} from "./encrypt";
 
 
 const checkEmail = (mail) => {
@@ -24,32 +25,32 @@ const checkWordLength = (word) => {
 }
 
 
-const getAllUsers = async key => {
+const getAllUsersEmail = async () => {
     const url = "http://78.249.128.56:8001/API/Show-Comptes-Utilisateur";
 
 
-    const fin = [];
+    const usersEmail = [];
 
     const response = await axios.get(url).then(
         (response) => {
             const data = response.data;
             data.forEach((element) => {
-                if (!fin.includes(element.Email)) {
-                    fin.push(element.Email);
+                if (!usersEmail.includes(element.Email)) {
+                    usersEmail.push(element.Email);
                 }
             });
         }
     )
-    localStorage.fin = JSON.stringify(fin);
-    return fin;
+    localStorage.fin = JSON.stringify(usersEmail);
+    return usersEmail;
 };
 
 
 const checkDuplicate = (mail) => {
 
-    const newFin = JSON.parse(localStorage.fin);
+    const newEmails = JSON.parse(localStorage.fin);
 
-    if (newFin.includes(mail)) {
+    if (newEmails.includes(mail)) {
         return true;
     }else {
         return false;
@@ -57,4 +58,7 @@ const checkDuplicate = (mail) => {
 }
 
 
-export {checkEmail, checkWordLength, getAllUsers, checkDuplicate};
+
+
+
+export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate};
