@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
-import {checkEmail, getAllUsersEmail, storedToken} from "../../../utils";
+import {checkEmail, getAllUsersEmail} from "../../../utils";
 import {StatusMsg} from "../../status";
 import axios from "axios";
 
@@ -26,6 +26,8 @@ export function Enterprise() {
     const toLog = () => {
         window.location.href = "https://plusdeca.fr";
     }
+
+    const storedToken = JSON.parse(localStorage.getItem('token'));
 
 
     getAllUsersEmail();

@@ -50,7 +50,6 @@ const checkDuplicate = (mail) => {
     }
 }
 
-const storedToken = JSON.parse(localStorage.getItem('token'));
 
 
-export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate, storedToken};
+export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate};
