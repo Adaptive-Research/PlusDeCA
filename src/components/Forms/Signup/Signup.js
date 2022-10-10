@@ -19,14 +19,12 @@ export function Signup() {
         window.location.href = "https://plusdeca.fr";
     }
 
-    const url = "http://78.249.128.56:8001/API/Creer-Compte-Utilisateur" ;
-    console.log(url) ;
 
     getAllUsersEmail();
 
     const checkCreate = async (mail, pass) => {
         // Launch a post request to check if user inputs are corrects and store the given token to create user
-        const url = "http://78.249.128.56:8001/API/Creer-Compte-Utilisateur" ;
+        const url = process.env.API_SIGNUP_URL ;
         if (checkEmail(mail)) {
             const response = await axios.post(url, {
                 Submit: 1,
