@@ -1,30 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-import { Route, Routes } from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import HomePage from "./pages/home";
 import {UnknownMsgPage} from "./pages/unknown_route";
+import LoginPage from "./pages/authentication/login";
+import SignUpPage from "./pages/authentication/signup";
+import {CreateEnterprisePage} from "./pages/Enterprise/create";
 
 
 function App() {
-  return (
-    <BrowserRouter>
+    return (
+        <BrowserRouter>
 
-      <div className="App">
+            <div className="App">
 
 
-        <Routes>
-          <Route path="/Network/build" element={<HomePage/>}/>  {/*  pour npm start */}
-          <Route path="/Network/build/index.html" element={<HomePage/>}/>  {/*  pour le site web  */}
-          <Route path="*" element={<UnknownMsgPage/>}/>
-        </Routes>
-      
-      </div>
+                <Routes>
+                    <Route path="/" name="login" element={<LoginPage/>}/> {/*  pour npm start */}
+                    <Route path="/signup" element={<SignUpPage/>}/>
+                    <Route path="dashboard" element={<HomePage/>}/>
+                    <Route path="/create_enterprise" element={<CreateEnterprisePage/>}/>
+                    <Route path="*" element={<UnknownMsgPage/>}/>
+                </Routes>
 
-    
-    </BrowserRouter>
-  );
+            </div>
+
+
+        </BrowserRouter>
+    );
 }
 
 export default App;

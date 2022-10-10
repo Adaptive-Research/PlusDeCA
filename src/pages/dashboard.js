@@ -2,6 +2,7 @@ import {Footer, SampleCard, Sidebar} from "../components";
 import {Breakpoint} from "react-socks";
 
 export function DashboardPage() {
+
     return (
         <div className="container-fluid">
             <Breakpoint small down>

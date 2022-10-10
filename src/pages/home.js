@@ -1,68 +1,61 @@
-import React from "react";
-import {Footer, SampleCard, Sidebar,HTML2React} from "../components";
-import { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
+import {Footer, Sidebar} from "../components";
 
 import Table from 'react-bootstrap/Table';
 import './home.css';
 
 
-
-
-
-
-
-
 export default function HomePage() {
-    {/*const [isLoading, setLoading] = useState(false);*/}
+
     const [data, setData] = useState(null);
-    const [DebugString, setDebugString] = useState(null) ;
+    const [DebugString, setDebugString] = useState(null);
 
 
     useEffect(() => {
-        {/*setLoading(true);*/}
+        {/*setLoading(true);*/
+        }
 
         const fetchData = async () => {
-            const response = await fetch('http://API.test:8001/API/Show-Compte-Utilisateur') ;
+            const response = await fetch('http://78.249.128.56:8001/API/Show-Comptes-Utilisateur');
             const newData = await response.json();
             setData(newData);
             setDebugString(JSON.stringify(data, null, 2));
-            {/*setLoading(false);*/}
+            {/*setLoading(false);*/
+            }
+
         };
-      
+
         fetchData();
-    },data) ;
+    }, data);
 
 
-    
-    if (data) {
-
+    if (data && localStorage.getItem('logged') === "true") {
         return (
             <div className="content-container">
-                
-                <div className="row"> 
+                <div className="row">
 
                     <div className="left-panel box">
-                        <Sidebar />
+                        <Sidebar/>
                     </div>
 
                     <div className="middle-panel box">
-                        <div  style={{padding: "1%" }}>
-                            <Table striped bordered hover style={{color:"red"}}>
+                        <div style={{padding: "1%"}}>
+                            <Table striped bordered hover style={{color: "red"}}>
                                 <thead>
-                                    <tr>
-                                        <td>id</td>
-                                        <td>Email</td>
-                                        <td>Email validated ?</td>
-                                    </tr> 
-                                </thead>   
+                                <tr>
+                                    <td>id</td>
+                                    <td>Email</td>
+                                    <td>Email verified ?</td>
+                                </tr>
+                                </thead>
 
                                 <tbody>
-                                { data.map((item, key) =>
+                                {data.map((item, key) =>
                                     <tr>
                                         <td>{item.id}</td>
                                         <td>{item.Email}</td>
-                                        <td>{item.Email_validated}</td>
-                                    </tr>    
+                                        <td>{item.Email_verified}</td>
+                                    </tr>
                                 )}
                                 </tbody>
                             </Table>
@@ -70,17 +63,13 @@ export default function HomePage() {
                     </div>
                 </div>
 
-               
+
                 <Footer/>
-            </div> );
+            </div>);
 
-      } else {
+    } else {
         return <div>pas de data </div>;
-      }
+    }
 
-
-      
-   
-   
 
 }
