@@ -47,7 +47,7 @@ export default function HomePage() {
                                 <tr>
                                     <td>id</td>
                                     <td>Email</td>
-                                    <td>Email validated ?</td>
+                                    <td>Email verified ?</td>
                                 </tr>
                                 </thead>
 
@@ -56,7 +56,7 @@ export default function HomePage() {
                                     <tr>
                                         <td>{item.id}</td>
                                         <td>{item.Email}</td>
-                                        <td>{item.Email_validated}</td>
+                                        <td>{item.Email_verified}</td>
                                     </tr>
                                 )}
                                 </tbody>

@@ -25,7 +25,8 @@ const checkWordLength = (word) => {
 
 
 const getAllUsersEmail = async () => {
-    const url = process.env.API_GET_USERS_URL;
+    const url =  "http://78.249.128.56:8001/API/Show-Comptes-Utilisateur" ;
+    console.log(url) ;
 
 
     const usersEmail = [];

@@ -10,8 +10,8 @@ import {encrypt} from "../../../encrypt";
 export function Login() {
     let [token, setToken] = useState([]);
     const [redStyle, setRedStyle] = useState("");
-    const [UsrMsg, setUsrMsg] = useState("We'll never share your email with anyone else.");
-    const [passMsg, setPassMsg] = useState("We'll never share your password with anyone else.");
+    const [UsrMsg, setUsrMsg] = useState("");
+    const [passMsg, setPassMsg] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ export function Login() {
 
     const checkAUth = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
-        const url = process.env.API_LOGIN_URL;
+        const url = "http://78.249.128.56:8001/API/Login";
 
         if (checkEmail(mail)) {
             const response = await axios.post(url, {

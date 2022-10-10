@@ -13,19 +13,20 @@ export function Signup() {
     const [redStyle, setRedStyle] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [emailMsg, setEmailMsg] = React.useState("We'll never share your email with anyone else.");
-    const [passwordMsg, setPasswordMsg] = React.useState("We'll never share your password with anyone else.");
+    const [emailMsg, setEmailMsg] = React.useState("");
+    const [passwordMsg, setPasswordMsg] = React.useState("");
     const toLog = () => {
         window.location.href = "https://plusdeca.fr";
     }
+
+    const url = "http://78.249.128.56:8001/API/Creer-Compte-Utilisateur" ;
+    console.log(url) ;
 
     getAllUsersEmail();
 
     const checkCreate = async (mail, pass) => {
         // Launch a post request to check if user inputs are corrects and store the given token to create user
-        const url = process.env.API_SIGNUP_URL;
-
-
+        const url = "http://78.249.128.56:8001/API/Creer-Compte-Utilisateur" ;
         if (checkEmail(mail)) {
             const response = await axios.post(url, {
                 Submit: 1,
