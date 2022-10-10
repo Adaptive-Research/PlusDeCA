@@ -6,7 +6,6 @@ import {Sidebar} from "./Sidebar/Sidebar";
 import {SampleCard} from "./Card/SampleCard";
 import {SurveyTable} from "./Table/Survey/Table";
 import {QuizTable} from "./Table/Quiz/Table";
-import {HTML2React} from "./HTML2React/HTML2React";
 
 export {
     Login,
@@ -21,5 +20,4 @@ export {
     Survey,
     SurveyTable,
     QuizTable,
-    HTML2React
 };
