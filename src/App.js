@@ -5,6 +5,7 @@ import HomePage from "./pages/home";
 import {UnknownMsgPage} from "./pages/unknown_route";
 import LoginPage from "./pages/authentication/login";
 import SignUpPage from "./pages/authentication/signup";
+import {CreateEnterprisePage} from "./pages/Enterprise/create";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/" name="login" element={<LoginPage/>}/> {/*  pour npm start */}
                     <Route path="/signup" element={<SignUpPage/>}/>
                     <Route path="dashboard" element={<HomePage/>}/>
+                    <Route path="/create_enterprise" element={<CreateEnterprisePage/>}/>
                     <Route path="*" element={<UnknownMsgPage/>}/>
                 </Routes>
 
