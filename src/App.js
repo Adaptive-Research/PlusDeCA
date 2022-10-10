@@ -8,11 +8,12 @@ import SignUpPage from "./pages/authentication/signup";
 
 
 function App() {
+   
+    
     return (
         <BrowserRouter>
 
             <div className="App">
-
 
                 <Routes>
                     <Route path="/" name="login" element={<LoginPage/>}/> {/*  pour npm start */}

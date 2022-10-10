@@ -20,11 +20,16 @@ export function Signup() {
     }
 
 
+    
+
+
     getAllUsersEmail();
 
     const checkCreate = async (mail, pass) => {
         // Launch a post request to check if user inputs are corrects and store the given token to create user
-        const url = process.env.API_SIGNUP_URL ;
+        const url = process.env.REACT_APP_API_SIGNUP_URL ;
+        console.log("checkCreate:REACT_APP_API_SIGNUP_URL: "+url) ;
+
         if (checkEmail(mail)) {
             const response = await axios.post(url, {
                 Submit: 1,

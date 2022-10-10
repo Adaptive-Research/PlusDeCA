@@ -25,8 +25,8 @@ const checkWordLength = (word) => {
 
 
 const getAllUsersEmail = async () => {
-    const url = process.env.API_GET_USERS_URL ;
-    console.log(url) ;
+    const url = process.env.REACT_APP_API_GET_USERS_URL ;
+    console.log("getAllUsersEmail:REACT_APP_API_GET_USERS_URL: "+url) ;
 
 
     const usersEmail = [];

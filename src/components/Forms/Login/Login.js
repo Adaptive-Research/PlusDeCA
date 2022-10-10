@@ -19,11 +19,13 @@ export function Login() {
         window.location.href = "https://plusdeca.fr";
     }
 
+
     getAllUsersEmail();
 
     const checkAUth = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
-        const url = process.env.API_LOGIN_URL ;
+        const url =  process.env.REACT_APP_API_LOGIN_URL ;
+        console.log("checkAUth:API_LOGIN_URL: "+url) ;
 
 
         if (checkEmail(mail)) {
