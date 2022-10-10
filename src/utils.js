@@ -11,12 +11,6 @@ const checkEmail = (mail) => {
 }
 
 const checkWordLength = (word) => {
-    // Check if password has a sufficient length and is strong
-    //  password :
-    // Should contain at least a capital letter
-    // Should contain at least a small letter
-    // Should contain at least a number
-    // Should contain at least a special character
     if (word.length < 8) {
         return false;
     }
@@ -26,8 +20,7 @@ const checkWordLength = (word) => {
 
 const getAllUsersEmail = async () => {
     const url = process.env.REACT_APP_API_GET_USERS_URL ;
-    console.log("getAllUsersEmail:REACT_APP_API_GET_USERS_URL: "+url) ;
-
+    
 
     const usersEmail = [];
 
@@ -57,5 +50,7 @@ const checkDuplicate = (mail) => {
     }
 }
 
+const storedToken = JSON.parse(localStorage.getItem('token'));
 
-export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate};
+
+export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate, storedToken};

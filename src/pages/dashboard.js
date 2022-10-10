@@ -2,8 +2,6 @@ import {Footer, SampleCard, Sidebar} from "../components";
 import {Breakpoint} from "react-socks";
 
 export function DashboardPage() {
-    const storedToken = JSON.parse(localStorage.getItem('token'));
-
 
     return (
         <div className="container-fluid">

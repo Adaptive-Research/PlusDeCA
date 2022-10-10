@@ -5,6 +5,7 @@ import HomePage from "./pages/home";
 import {UnknownMsgPage} from "./pages/unknown_route";
 import LoginPage from "./pages/authentication/login";
 import SignUpPage from "./pages/authentication/signup";
+import {CreateEnterprisePage} from "./pages/Enterprise/create";
 
 
 function App() {

@@ -25,7 +25,6 @@ export function Login() {
     const checkAUth = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
         const url =  process.env.REACT_APP_API_LOGIN_URL ;
-        console.log("checkAUth:API_LOGIN_URL: "+url) ;
 
 
         if (checkEmail(mail)) {
@@ -44,6 +43,7 @@ export function Login() {
                 setRedStyle("red");
                 setUsrMsg("Wrong email or password");
                 setPassMsg("Wrong email or password");
+                localStorage.setItem('logged', JSON.stringify(false));
             } else {
                 console.log("User authenticated");
 
@@ -51,6 +51,8 @@ export function Login() {
                     let temp = response.data
                     setToken(elem => [token.push(temp)]);
                     localStorage.setItem('token', JSON.stringify(temp));
+                    localStorage.setItem('userMail', mail);
+                    localStorage.setItem('logged', JSON.stringify(true));
                 } catch (e) {
                     console.log(e);
                 } finally {

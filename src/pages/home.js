@@ -6,8 +6,7 @@ import './home.css';
 
 
 export default function HomePage() {
-    {/*const [isLoading, setLoading] = useState(false);*/
-    }
+
     const [data, setData] = useState(null);
     const [DebugString, setDebugString] = useState(null);
 
@@ -23,17 +22,16 @@ export default function HomePage() {
             setDebugString(JSON.stringify(data, null, 2));
             {/*setLoading(false);*/
             }
+
         };
 
         fetchData();
     }, data);
 
 
-    if (data) {
-
+    if (data && localStorage.getItem('logged') === "true") {
         return (
             <div className="content-container">
-
                 <div className="row">
 
                     <div className="left-panel box">

@@ -1,4 +1,4 @@
-import {Login, Reset, Signup, Survey, Trial} from "./Forms";
+import {Enterprise, Login, Reset, Signup} from "./Forms";
 import {Footer} from "./Footer/Footer";
 import {Board} from "./Header/Board";
 import {StatusMsg} from "./status";
@@ -16,8 +16,7 @@ export {
     StatusMsg,
     Sidebar,
     SampleCard,
-    Trial,
-    Survey,
     SurveyTable,
     QuizTable,
+    Enterprise
 };
