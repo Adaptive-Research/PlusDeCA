@@ -16,6 +16,8 @@ function App() {
             <div className="App">
 
                 <Routes>
+                    <Route path="/Network/index.html" name="login" element={<LoginPage/>}/> {/*  pour le deploiement */}
+
                     <Route path="/" name="login" element={<LoginPage/>}/> {/*  pour npm start */}
                     <Route path="/signup" element={<SignUpPage/>}/>
                     <Route path="dashboard" element={<HomePage/>}/>
