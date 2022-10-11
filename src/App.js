@@ -2,6 +2,7 @@ import './App.css';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import HomePage from "./pages/home";
+import Test from "./pages/test";
 import {UnknownMsgPage} from "./pages/unknown_route";
 import LoginPage from "./pages/authentication/login";
 import SignUpPage from "./pages/authentication/signup";
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/" name="login" element={<LoginPage/>}/> {/*  pour npm start */}
                     <Route path="/signup" element={<SignUpPage/>}/>
                     <Route path="dashboard" element={<HomePage/>}/>
+                    <Route path="/test" element={<Test/>}/>
                     <Route path="/create_enterprise" element={<CreateEnterprisePage/>}/>
                     <Route path="*" element={<UnknownMsgPage/>}/>
                 </Routes>

@@ -106,6 +106,25 @@ export function Sidebar(props) {
                     ]}
                 />
             </div>
+
+            <div>
+                <Navigation
+                    activeItemId={location.pathname}
+                    onSelect={({itemId}) => {
+                        navigate(itemId);
+                    }}
+                    items={[
+                        {
+                            title: 'Test',
+                            elemBefore: () => <Icon name="log-out"/>,
+                            itemId: "/test"
+                        }
+                    ]}
+                />
+            </div>
+
+
+
             <div>
                 <Navigation
                     activeItemId={location.pathname}
