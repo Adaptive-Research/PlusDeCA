@@ -35,12 +35,12 @@ export default function Test() {
                 <div className="row">
 
                     
-                    <div className="left-panel box">
+                    <div className="left-panel">
                         <Sidebar2/>
                     </div>
                     
                     
-                    <div className="middle-panel box">
+                    <div className="middle-panel">
                         <Toolbar/>
 
 

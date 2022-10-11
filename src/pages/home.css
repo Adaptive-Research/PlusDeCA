@@ -11,11 +11,11 @@
 }
 
 .left-panel {
-    flex: 2;
+    flex: 1;
 }
 
 .middle-panel {
-    flex: 10;
+    flex: 49;
 }
 
 .right-panel {
