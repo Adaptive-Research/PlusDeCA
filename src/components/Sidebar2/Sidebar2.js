@@ -5,8 +5,6 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
-
-
 import Link from '@mui/material/Link';
 
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
@@ -52,7 +50,7 @@ export function Sidebar2(props) {
   <Item> <Link href="#" >  <CalendarMonthIcon fontSize="large"/> </Link></Item>
   <Item> <Link href="#" >  <AccountBoxIcon fontSize="large"/> </Link></Item>
 
-  <Item> <Link href="#" >  <LogoutIcon fontSize="large"/> </Link></Item>
+  <Item> <Link href="/" >  <LogoutIcon fontSize="large"/> </Link></Item>
   
 
 
