@@ -35,7 +35,7 @@ export function Activity() {
                 token: storedToken,
                 Submit: 1,
                 idEntreprise: getUserId(),
-                TypeActivite: getUserId(),
+                TypeActivite: activity,
                 Nom: name,
                 Description: description,
                 SiteWeb: website,
