@@ -24,6 +24,7 @@ export function Activity() {
 
 
     const storedToken = JSON.parse(localStorage.getItem('token'));
+    console.log("token:" + storedToken) ;
 
 
     const checkActivity = async (mail) => {

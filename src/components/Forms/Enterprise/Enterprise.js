@@ -28,38 +28,37 @@ export function Enterprise() {
 
 
 
-    const checkEnterprise = async (mail) => {
+    const SaveEnterprise = async () => {
         // Launch a post request to check if user inputs are corrects and store the given token to create enterprise
         const url = process.env.REACT_APP_API_CREATE_ENTERPRISE_URL;
-        if (checkEmail(mail)) {
-            const response = await axios.post(url, {
-                token: storedToken,
-                Submit: 1,
-                Nom: name,
-                SiteWeb: website,
-                Siret: siret,
-                Email: email,
-                Telephone: tel
-            }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            })
-
-            if (response.data.includes("ERROR:")) {
-                console.log(`Error: ${response.data}`);
-                setRedStyle("red");
-                setColor("alert alert-danger");
-                setStatus(`${response.data}`)
-            } else {
-                console.log("enterprise added");
-                setColor("alert alert-success");
-                setStatus("Enterprise added");
+        const response = await axios.post(url, {
+            token: storedToken,
+            Submit: 1,
+            Nom: name,
+            SiteWeb: website,
+            Siret: siret,
+            Email: email,
+            Telephone: tel
+        }, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
+        })
+
+        if (response.data.includes("ERROR:")) {
+            console.log(`Error: ${response.data}`);
+            setRedStyle("red");
+            setColor("alert alert-danger");
+            setStatus(`${response.data}`)
+        } else {
+            console.log("enterprise added");
+            setColor("alert alert-success");
+            setStatus("Enterprise added");
         }
-
-
     }
+
+
+    
 
     const basicCheck = (name, website, siret, email, telephone) => {
         let nameCheck, websiteCheck, siretCheck, mailCheck, telCheck, check;
@@ -71,13 +70,6 @@ export function Enterprise() {
             setNameMsg("")
         }
 
-        if (website.length === 0) {
-            websiteCheck = false;
-            setWebsiteMsg("Website field is required")
-        } else {
-            websiteCheck = true;
-            setNameMsg("")
-        }
 
 
         if (siret.length === 0) {
@@ -89,27 +81,9 @@ export function Enterprise() {
         }
 
 
-        if (email.length === 0) {
-            mailCheck = false;
-            setEmailMsg("Email field is required");
-        } else if (!checkEmail(email)) {
-            setEmailMsg("Email is not valid");
-            mailCheck = false;
-        } else {
-            mailCheck = true;
-            setEmailMsg("");
-        }
 
-        if (telephone.length === 0) {
-            telCheck = false;
-            setTelMsg("Telephone field is required");
-        } else {
-            telCheck = true;
-            setTelMsg("");
-        }
-
-        if (nameCheck && websiteCheck && siretCheck && mailCheck && telCheck) {
-            checkEnterprise(email);
+        if (nameCheck && siretCheck) {
+            SaveEnterprise();
         }
 
 
@@ -135,6 +109,16 @@ export function Enterprise() {
                 <Form className="mt-5 mx-auto col-md-4 shadow" style={{backgroundColor: "#D9D9D9"}}>
                     <h4 className="text-center fw-semibold mt-3 mb-3" style={{cursor: "Pointer"}}
                         onClick={toLog}>PlusDeCA</h4>
+
+                    <Form.Group controlId="formBasicSiret" className="mt-3">
+                        <Form.Label>Siret</Form.Label>
+                        <Form.Control type="text" placeholder="Enter siret"
+                                      onChange={(e) => setSiret(e.target.value)}/>
+                        <Form.Text className={"text-muted text-justify " + redStyle}>
+                            {siretMsg}
+                        </Form.Text>
+                    </Form.Group>
+
                     <Form.Group controlId="formBasicName" className="mt-3">
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter name"
@@ -149,14 +133,6 @@ export function Enterprise() {
                                       onChange={(e) => setWebsite(e.target.value)}/>
                         <Form.Text className={"text-muted text-justify " + redStyle}>
                             {websiteMsg}
-                        </Form.Text>
-                    </Form.Group>
-                    <Form.Group controlId="formBasicSiret" className="mt-3">
-                        <Form.Label>Siret</Form.Label>
-                        <Form.Control type="text" placeholder="Enter siret"
-                                      onChange={(e) => setSiret(e.target.value)}/>
-                        <Form.Text className={"text-muted text-justify " + redStyle}>
-                            {siretMsg}
                         </Form.Text>
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail" className="mt-3">
