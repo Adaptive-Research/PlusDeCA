@@ -27,39 +27,36 @@ export function Activity() {
     console.log("token:" + storedToken) ;
 
 
-    const checkActivity = async (mail) => {
-        // Launch a post request to check if user inputs are corrects and store the given token to create enterprise
+    const SaveActivity = async () => {
         const url = process.env.REACT_APP_API_CREATE_ACTIVITY_URL;
-        if (checkEmail(mail)) {
-            const url = process.env.REACT_APP_API_CREATE_ACTIVITY_URL;
-            const response = await axios.post(url, {
-                token: storedToken,
-                Submit: 1,
-                idEntreprise: getUserId(),
-                TypeActivite: activity,
-                Nom: name,
-                Description: description,
-                SiteWeb: website,
-                Email: email,
-                Telephone: tel
-            }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            })
-
-            if (response.data.includes("ERROR:")) {
-                console.log(`Error: ${response.data}`);
-                setRedStyle("red");
-                setColor("alert alert-danger");
-                setStatus(`${response.data}`)
-            } else {
-                console.log("activity added");
-                setColor("alert alert-success");
-                setStatus("Activity added");
+        const response = await axios.post(url, {
+            token: storedToken,
+            Submit: 1,
+            idEntreprise: getUserId(),
+            TypeActivite: activity,
+            Nom: name,
+            Description: description,
+            SiteWeb: website,
+            Email: email,
+            Telephone: tel
+        }, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
             }
+        })
+
+        if (response.data.includes("ERROR:")) {
+            console.log(`Error: ${response.data}`);
+            setRedStyle("red");
+            setColor("alert alert-danger");
+            setStatus(`${response.data}`)
+        } else {
+            console.log("activity added");
+            setColor("alert alert-success");
+            setStatus("Activity added");
         }
     }
+    
 
 
     const basicCheck = (name, website, email, telephone) => {
@@ -72,35 +69,9 @@ export function Activity() {
             nameCheck = true;
         }
 
-        if (website.length === 0) {
-            setWebsiteMsg("Website is required");
-            webCheck = false;
-        } else {
-            setWebsiteMsg("");
-            webCheck = true;
-        }
 
-        if (email.length === 0) {
-            mailCheck = false;
-            setEmailMsg("Email field is required");
-        } else if (!checkEmail(email)) {
-            setEmailMsg("Email is not valid");
-            mailCheck = false;
-        } else {
-            mailCheck = true;
-            setEmailMsg("");
-        }
-
-        if (telephone.length === 0) {
-            telCheck = false;
-            setTelMsg("Telephone field is required");
-        } else {
-            telCheck = true;
-            setTelMsg("");
-        }
-
-        if (nameCheck && webCheck && mailCheck && telCheck) {
-            checkActivity(email);
+        if (nameCheck ) {
+            SaveActivity();
         }
     }
 
