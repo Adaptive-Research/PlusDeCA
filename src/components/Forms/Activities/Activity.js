@@ -2,7 +2,7 @@ import {StatusMsg} from "../../status";
 import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
-import {checkEmail, toLog} from "../../../utils";
+import {checkEmail, getUserId, toLog} from "../../../utils";
 import axios from "axios";
 
 export function Activity() {
@@ -34,8 +34,8 @@ export function Activity() {
             const response = await axios.post(url, {
                 token: storedToken,
                 Submit: 1,
-                idEntreprise: 1,
-                TypeActivite: activity,
+                idEntreprise: getUserId(),
+                TypeActivite: getUserId(),
                 Nom: name,
                 Description: description,
                 SiteWeb: website,
