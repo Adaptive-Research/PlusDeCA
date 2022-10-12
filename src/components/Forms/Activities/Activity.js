@@ -2,7 +2,7 @@ import {StatusMsg} from "../../status";
 import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
-import {checkEmail, toLog} from "../../../utils";
+import {checkEmail, getUserId, toLog} from "../../../utils";
 import axios from "axios";
 
 export function Activity() {
@@ -31,9 +31,12 @@ export function Activity() {
         // Launch a post request to check if user inputs are corrects and store the given token to create enterprise
         const url = process.env.REACT_APP_API_CREATE_ACTIVITY_URL;
         if (checkEmail(mail)) {
+            const url = process.env.REACT_APP_API_CREATE_ACTIVITY_URL;
             const response = await axios.post(url, {
                 token: storedToken,
                 Submit: 1,
+                idEntreprise: getUserId(),
+                TypeActivite: activity,
                 Nom: name,
                 Description: description,
                 SiteWeb: website,
