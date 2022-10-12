@@ -21,6 +21,7 @@ export function Enterprise() {
     const [statusResponse, setStatus] = React.useState("");
     const [statusColor, setColor] = React.useState("");
 
+    
 
     getAllUsersEmail();
     const storedToken = JSON.parse(localStorage.getItem('token'));
