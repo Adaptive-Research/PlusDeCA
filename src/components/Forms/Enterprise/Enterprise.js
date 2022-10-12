@@ -24,8 +24,6 @@ export function Enterprise() {
 
     getAllUsersEmail();
     const storedToken = JSON.parse(localStorage.getItem('token'));
-    console.log("Test 1: "+ typeof(storedToken));
-    console.log("Test 2: "+typeof( "17;d85b8da4648d9a94b3203bfe9f992c82de161ddbed228708d61ad350a5ab"))
 
 
     const checkEnterprise = async (mail) => {
@@ -33,7 +31,7 @@ export function Enterprise() {
         const url = process.env.REACT_APP_API_CREATE_ENTERPRISE_URL;
         if (checkEmail(mail)) {
             const response = await axios.post(url, {
-                token: "17;d85b8da4648d9a94b3203bfe9f992c82de161ddbed228708d61ad350a5ab",
+                token: storedToken,
                 Submit: 1,
                 Nom: name,
                 SiteWeb: website,
