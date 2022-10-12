@@ -4,7 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
-import {checkDuplicate, checkEmail, getAllUsersEmail} from "../../../utils";
+import {checkDuplicate, checkEmail, getAllEnterprises, getAllUsersEmail, getUserId, toLog} from "../../../utils";
 import {encrypt} from "../../../encrypt";
 
 export function Login() {
@@ -15,16 +15,12 @@ export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const toLog = () => {
-        window.location.href = "https://plusdeca.fr";
-    }
-
 
     getAllUsersEmail();
 
     const checkAUth = async (mail, pass) => {
         // Launch a post request to check if user inputs are correects and store the given token to create user
-        const url =  process.env.REACT_APP_API_LOGIN_URL ;
+        const url = process.env.REACT_APP_API_LOGIN_URL;
 
 
         if (checkEmail(mail)) {
@@ -50,7 +46,9 @@ export function Login() {
                 try {
                     let temp = response.data
                     setToken(elem => [token.push(temp)]);
+                    console.log(temp);
                     localStorage.setItem('token', JSON.stringify(temp));
+                    getAllEnterprises();
                     localStorage.setItem('userMail', mail);
                     localStorage.setItem('logged', JSON.stringify(true));
                 } catch (e) {

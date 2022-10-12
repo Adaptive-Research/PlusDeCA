@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Footer, Sidebar2,Toolbar} from "../components";
+import {Footer, Sidebar2, Toolbar} from "../components";
 
 import Table from 'react-bootstrap/Table';
 import './home.css';
@@ -34,12 +34,12 @@ export default function Test() {
             <div className="content-container">
                 <div className="row">
 
-                    
+
                     <div className="left-panel">
                         <Sidebar2/>
                     </div>
-                    
-                    
+
+
                     <div className="middle-panel">
                         <Toolbar/>
 

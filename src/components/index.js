@@ -1,4 +1,4 @@
-import {Enterprise, Login, Reset, Signup} from "./Forms";
+import {Enterprise, Login, Reset, Signup, Activity} from "./Forms";
 import {Footer} from "./Footer/Footer";
 import {Board} from "./Header/Board";
 import {StatusMsg} from "./status";
@@ -7,7 +7,7 @@ import {Sidebar2} from "./Sidebar2/Sidebar2";
 import {Toolbar} from "./Toolbar/Toolbar";
 import {SampleCard} from "./Card/SampleCard";
 import {SurveyTable} from "./Table/Survey/Table";
-import {QuizTable} from "./Table/Quiz/Table";
+import {EnterpriseTable} from "./Table/Enterprise/Table";
 
 export {
     Login,
@@ -21,6 +21,7 @@ export {
     Toolbar,
     SampleCard,
     SurveyTable,
-    QuizTable,
-    Enterprise
+    EnterpriseTable,
+    Enterprise,
+    Activity
 };

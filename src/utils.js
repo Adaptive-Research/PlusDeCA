@@ -19,8 +19,8 @@ const checkWordLength = (word) => {
 
 
 const getAllUsersEmail = async () => {
-    const url = process.env.REACT_APP_API_GET_USERS_URL ;
-    
+    const url = process.env.REACT_APP_API_GET_USERS_URL;
+
 
     const usersEmail = [];
 
@@ -50,6 +50,41 @@ const checkDuplicate = (mail) => {
     }
 }
 
+const toLog = () => {
+    window.location.href = "https://plusdeca.fr";
+}
 
 
-export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate};
+const getUserId = (token) =>{
+    // return the user id from the login token
+    // user id is  a number sequence before ";"
+    const userToken = JSON.parse(localStorage.token);
+    const newArr = userToken.split(";");
+    const usrId = newArr[0];
+    return usrId;
+}
+
+
+const getAllEnterprises = () =>{
+    // retrieve all enterprises in server
+    // search and store enterprises created by active user
+    // return them in array
+    const url = process.env.REACT_APP_API_SHOW_ENTERPRISES_URL;
+    const personalId = getUserId();
+    const response = axios.get(url).then(
+        (response) => {
+            const data = response.data;
+            const userEnterprises = [];
+            data.forEach((element) => {
+                if (element.id === personalId) {
+                    userEnterprises.push(element);
+                }
+            });
+            console.log(userEnterprises);
+            localStorage.setItem('userEnterprises', JSON.stringify(userEnterprises));
+            return userEnterprises;
+        })
+}
+
+
+export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate, toLog, getUserId, getAllEnterprises};

@@ -65,7 +65,7 @@ export function Sidebar(props) {
                             subNav: [
                                 {
                                     title: "ajouter",
-                                    itemId: "/create_trial",
+                                    itemId: "/create_activity",
                                     elemBefore: () => <Icon name="plus"/>
                                 },
                                 {
@@ -122,7 +122,6 @@ export function Sidebar(props) {
                     ]}
                 />
             </div>
-
 
 
             <div>

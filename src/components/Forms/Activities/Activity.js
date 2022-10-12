@@ -1,43 +1,41 @@
-import React, {useState} from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Form} from 'react-bootstrap';
-import {Link} from "react-router-dom";
-import {checkEmail, getAllUsersEmail, toLog} from "../../../utils";
 import {StatusMsg} from "../../status";
+import {Button, Form} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import React, {useState} from "react";
+import {checkEmail, toLog} from "../../../utils";
 import axios from "axios";
 
-export function Enterprise() {
+export function Activity() {
     const [redStyle, setRedStyle] = useState("");
-    const [nameMsg, setNameMsg] = useState("");
-    const [websiteMsg, setWebsiteMsg] = useState("");
-    const [siretMsg, setSiretMsg] = useState("");
-    const [emailMsg, setEmailMsg] = useState("");
-    const [telMsg, setTelMsg] = useState("");
+    const  [activity, setActivity] = useState("");
+    const [activityMsg, setActivityMsg] = useState("");
     const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
     const [website, setWebsite] = useState("");
-    const [siret, setSiret] = useState("");
     const [email, setEmail] = useState("");
     const [tel, setTel] = useState("");
+    const [nameMsg, setNameMsg] = useState("");
+    const [descriptionMsg, setDescriptionMsg] = useState("");
+    const [websiteMsg, setWebsiteMsg] = useState("");
+    const [telMsg, setTelMsg] = useState("");
+    const [emailMsg, setEmailMsg] = useState("");
     const [statusResponse, setStatus] = React.useState("");
     const [statusColor, setColor] = React.useState("");
 
 
     const storedToken = JSON.parse(localStorage.getItem('token'));
-    getAllUsersEmail();
-    console.log(storedToken);
 
 
-
-    const checkEnterprise = async (mail) => {
+    const checkActivity = async (mail) => {
         // Launch a post request to check if user inputs are corrects and store the given token to create enterprise
-        const url = process.env.REACT_APP_API_CREATE_ENTERPRISE_URL;
+        const url = process.env.REACT_APP_API_CREATE_ACTIVITY_URL;
         if (checkEmail(mail)) {
             const response = await axios.post(url, {
                 token: storedToken,
                 Submit: 1,
                 Nom: name,
+                Description: description,
                 SiteWeb: website,
-                Siret: siret,
                 Email: email,
                 Telephone: tel
             }, {
@@ -52,42 +50,31 @@ export function Enterprise() {
                 setColor("alert alert-danger");
                 setStatus(`${response.data}`)
             } else {
-                console.log("enterprise added");
+                console.log("activity added");
                 setColor("alert alert-success");
-                setStatus("Enterprise added");
+                setStatus("Activity added");
             }
         }
-
-
     }
 
-    const basicCheck = (name, website, siret, email, telephone) => {
-        let nameCheck, websiteCheck, siretCheck, mailCheck, telCheck, check;
+
+    const basicCheck = (name, website, email, telephone) => {
+        let nameCheck, webCheck, mailCheck, telCheck;
         if (name.length === 0) {
+            setNameMsg("Name is required");
             nameCheck = false;
-            setNameMsg("Name field is required")
         } else {
+            setNameMsg("");
             nameCheck = true;
-            setNameMsg("")
         }
 
         if (website.length === 0) {
-            websiteCheck = false;
-            setWebsiteMsg("Website field is required")
+            setWebsiteMsg("Website is required");
+            webCheck = false;
         } else {
-            websiteCheck = true;
-            setNameMsg("")
+            setWebsiteMsg("");
+            webCheck = true;
         }
-
-
-        if (siret.length === 0) {
-            siretCheck = false;
-            setSiretMsg("Siret field is required")
-        } else {
-            siretCheck = true;
-            setSiretMsg("");
-        }
-
 
         if (email.length === 0) {
             mailCheck = false;
@@ -108,24 +95,21 @@ export function Enterprise() {
             setTelMsg("");
         }
 
-        if (nameCheck && websiteCheck && siretCheck && mailCheck && telCheck) {
-            checkEnterprise(email);
+        if (nameCheck && webCheck && mailCheck && telCheck) {
+            checkActivity(email);
         }
-
-
     }
 
+
     const handleSubmit = () => {
-        // Check if email and password are valid then launch request
         try {
-            basicCheck(name, website, siret, email, tel);
+            basicCheck(name, website, email, tel);
         } catch (e) {
             console.log(e);
         } finally {
-            console.log("test done");
+            console.log("Activity checked");
         }
-    }
-
+    };
 
     return (
         <div className="container-fluid">
@@ -135,6 +119,14 @@ export function Enterprise() {
                 <Form className="mt-5 mx-auto col-md-4 shadow" style={{backgroundColor: "#D9D9D9"}}>
                     <h4 className="text-center fw-semibold mt-3 mb-3" style={{cursor: "Pointer"}}
                         onClick={toLog}>PlusDeCA</h4>
+                    <Form.Group controlId="formBasicActivity" className="mt-3">
+                        <Form.Label>Activity type</Form.Label>
+                        <Form.Control type="text" placeholder="Enter activity type"
+                                      onChange={(e) => setActivity(e.target.value)}/>
+                        <Form.Text className={"text-muted text-justify " + redStyle}>
+                            {activityMsg}
+                        </Form.Text>
+                    </Form.Group>
                     <Form.Group controlId="formBasicName" className="mt-3">
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter name"
@@ -149,14 +141,6 @@ export function Enterprise() {
                                       onChange={(e) => setWebsite(e.target.value)}/>
                         <Form.Text className={"text-muted text-justify " + redStyle}>
                             {websiteMsg}
-                        </Form.Text>
-                    </Form.Group>
-                    <Form.Group controlId="formBasicSiret" className="mt-3">
-                        <Form.Label>Siret</Form.Label>
-                        <Form.Control type="text" placeholder="Enter siret"
-                                      onChange={(e) => setSiret(e.target.value)}/>
-                        <Form.Text className={"text-muted text-justify " + redStyle}>
-                            {siretMsg}
                         </Form.Text>
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail" className="mt-3">
