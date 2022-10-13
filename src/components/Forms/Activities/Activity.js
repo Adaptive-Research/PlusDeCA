@@ -2,12 +2,14 @@ import {StatusMsg} from "../../status";
 import {Button, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
-import {checkEmail, getUserId, toLog} from "../../../utils";
+import {getEnterprisesByUser, getUserId, toLog} from "../../../utils";
 import axios from "axios";
 
 export function Activity() {
     const [redStyle, setRedStyle] = useState("");
-    const  [activity, setActivity] = useState("");
+    const [enterprise, setEnterprise] = useState("");
+    const [enterpriseMsg, setEnterpriseMsg] = useState("");
+    const [activity, setActivity] = useState("");
     const [activityMsg, setActivityMsg] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -24,7 +26,7 @@ export function Activity() {
 
 
     const storedToken = JSON.parse(localStorage.getItem('token'));
-    console.log("token:" + storedToken) ;
+    getEnterprisesByUser();
 
 
     const SaveActivity = async () => {
@@ -56,7 +58,14 @@ export function Activity() {
             setStatus("Activity added");
         }
     }
-    
+
+    const getEnterpriseName = () => {
+        const storedEnterprise = JSON.parse(localStorage.getItem('userEnterprises'));
+        // return each element id and name via html option tag
+        return storedEnterprise.map((elem) => {
+            return <option key={elem.id} value={elem.id}>{elem.NomEntreprise}</option>
+        })
+    }
 
 
     const basicCheck = (name, website, email, telephone) => {
@@ -70,7 +79,7 @@ export function Activity() {
         }
 
 
-        if (nameCheck ) {
+        if (nameCheck) {
             SaveActivity();
         }
     }
@@ -94,6 +103,16 @@ export function Activity() {
                 <Form className="mt-5 mx-auto col-md-4 shadow" style={{backgroundColor: "#D9D9D9"}}>
                     <h4 className="text-center fw-semibold mt-3 mb-3" style={{cursor: "Pointer"}}
                         onClick={toLog}>PlusDeCA</h4>
+                    <Form.Group controlId="formBasicEnterprise" className="mt-3">
+                        <Form.Label>Enterprise</Form.Label>
+                        <Form.Select type="select" placeholder="Choose one case"
+                                     onChange={(e) => setEnterprise(e.target.value)}>
+                            {getEnterpriseName()}
+                        </Form.Select>
+                        <Form.Text className={"text-muted text-justify " + redStyle}>
+                            {enterpriseMsg}
+                        </Form.Text>
+                    </Form.Group>
                     <Form.Group controlId="formBasicActivity" className="mt-3">
                         <Form.Label>Activity type</Form.Label>
                         <Form.Control type="text" placeholder="Enter activity type"
