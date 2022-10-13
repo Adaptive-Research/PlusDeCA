@@ -43,7 +43,7 @@ export function Sidebar(props) {
                                 },
                                 {
                                     title: "Liste",
-                                    itemId: "/list_trial",
+                                    itemId: "/list_enterprise",
                                     elemBefore: () => <Icon name="radio"/>
                                 }
                             ]

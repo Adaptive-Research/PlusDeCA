@@ -1,16 +1,25 @@
 import Table from 'react-bootstrap/Table';
 import {TableRow} from "../Row";
-import {getUserId} from "../../../utils";
+import {getEnterprisesByUser, getUserId} from "../../../utils";
 import {useState} from "react";
 
 export function EnterpriseTable() {
 
-    const userId = getUserId();
-    const enterpriseId = localStorage.getItem('userEnterprise');
+    getEnterprisesByUser();
+    const userEnterprises = JSON.parse(localStorage.getItem('userEnterprises'));
 
+    const [enterprises, setEnterprises] = useState(userEnterprises);
 
-    const [data, setData] = useState([enterpriseId]);
-
+    const getRows = () => {
+        return enterprises.map((enterprise, index) => {
+            return (
+                <TableRow key={index}>
+                    <td>{enterprise.NomEntreprise}</td>
+                    <td>{enterprise.id}</td>
+                </TableRow>
+            )
+        })
+    }
 
     return (
 
@@ -18,25 +27,14 @@ export function EnterpriseTable() {
             <thead>
             <tr>
                 <th>#</th>
-                <th>siret</th>
+                <th>id_enterprise</th>
                 <th>name</th>
-                <th>website</th>
-                <th>email</th>
-                <th>telephone</th>
                 <th>update</th>
                 <th>delete</th>
             </tr>
             </thead>
             <tbody>
-            {data.map((item, key) =>
-                <TableRow ide={item.id}
-                          siret={item.Siret}
-                          name={item.Nom}
-                          website={item.SiteWeb}
-                          email={item.Email}
-                          telephone={item.Telephone}
-                />
-            )}
+            {getRows()}
             </tbody>
         </Table>
 
