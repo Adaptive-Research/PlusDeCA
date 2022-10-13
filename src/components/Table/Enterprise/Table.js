@@ -1,7 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import {TableRow} from "../Row";
 import {getUserId} from "../../../utils";
-import axios from "axios";
 import {useState} from "react";
 
 export function EnterpriseTable() {
@@ -31,10 +30,10 @@ export function EnterpriseTable() {
             <tbody>
             {data.map((item, key) =>
                 <TableRow ide={item.id}
-                            siret={item.Siret}
-                            name={item.Nom}
-                            website={item.SiteWeb}
-                            email={item.Email}
+                          siret={item.Siret}
+                          name={item.Nom}
+                          website={item.SiteWeb}
+                          email={item.Email}
                           telephone={item.Telephone}
                 />
             )}
