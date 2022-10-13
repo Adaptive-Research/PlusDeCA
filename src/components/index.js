@@ -1,4 +1,4 @@
-import {Enterprise, Login, Reset, Signup, Activity} from "./Forms";
+import {Activity, Enterprise, Login, Reset, Signup} from "./Forms";
 import {Footer} from "./Footer/Footer";
 import {Board} from "./Header/Board";
 import {StatusMsg} from "./status";
