@@ -55,7 +55,7 @@ const toLog = () => {
 }
 
 
-const getUserId = (token) =>{
+const getUserId = (token) => {
     // return the user id from the login token
     // user id is  a number sequence before ";"
     const userToken = JSON.parse(localStorage.token);
@@ -65,7 +65,7 @@ const getUserId = (token) =>{
 }
 
 
-const getAllEnterprises = () =>{
+const getAllEnterprises = () => {
     // retrieve all enterprises in server
     // search and store enterprises created by active user
     // return them in array
@@ -87,4 +87,40 @@ const getAllEnterprises = () =>{
 }
 
 
-export {checkEmail, checkWordLength, getAllUsersEmail, checkDuplicate, toLog, getUserId, getAllEnterprises};
+const getEnterprisesByUser = () => {
+    // retrieve all enterprises in server
+    // search and store enterprises created by active user
+    // return them in array
+    const url = process.env.REACT_APP_API_SHOW_ENTERPRISES_FOR_USER_URL;
+    const userId = getUserId();
+    const response = axios.post(url, {
+        token: JSON.parse(localStorage.token),
+        Submit: 1,
+        idUtilisateur: userId
+    }, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    }).then(
+        (response) => {
+            const data = response.data;
+            const userEnterprises = [];
+            data.forEach((element) => {
+                userEnterprises.push(element);
+            });
+            localStorage.setItem('userEnterprises', JSON.stringify(userEnterprises));
+            return userEnterprises;
+        })
+}
+
+
+export {
+    checkEmail,
+    checkWordLength,
+    getAllUsersEmail,
+    checkDuplicate,
+    toLog,
+    getUserId,
+    getAllEnterprises,
+    getEnterprisesByUser
+};
