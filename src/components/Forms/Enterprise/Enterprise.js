@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
-import {checkEmail, getAllUsersEmail, toLog} from "../../../utils";
+import {getAllUsersEmail, toLog} from "../../../utils";
 import {StatusMsg} from "../../status";
 import axios from "axios";
 
@@ -21,7 +21,6 @@ export function Enterprise() {
     const [statusResponse, setStatus] = React.useState("");
     const [statusColor, setColor] = React.useState("");
 
-    
 
     getAllUsersEmail();
     const storedToken = JSON.parse(localStorage.getItem('token'));
@@ -57,8 +56,6 @@ export function Enterprise() {
     }
 
 
-    
-
     const basicCheck = (name, website, siret, email, telephone) => {
         let nameCheck, websiteCheck, siretCheck, mailCheck, telCheck, check;
         if (name.length === 0) {
@@ -70,7 +67,6 @@ export function Enterprise() {
         }
 
 
-
         if (siret.length === 0) {
             siretCheck = false;
             setSiretMsg("Siret field is required")
@@ -78,7 +74,6 @@ export function Enterprise() {
             siretCheck = true;
             setSiretMsg("");
         }
-
 
 
         if (nameCheck && siretCheck) {
@@ -103,7 +98,6 @@ export function Enterprise() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <h6>{storedToken}</h6>
                 <StatusMsg color={statusColor} message={statusResponse}/>
                 <Form className="mt-5 mx-auto col-md-4 shadow" style={{backgroundColor: "#D9D9D9"}}>
                     <h4 className="text-center fw-semibold mt-3 mb-3" style={{cursor: "Pointer"}}
