@@ -4,7 +4,7 @@ import {Button, Form} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
-import {checkDuplicate, checkEmail, getAllEnterprises, getAllUsersEmail, getUserId, toLog} from "../../../utils";
+import {checkDuplicate, checkEmail, getAllUsersEmail, toLog} from "../../../utils";
 import {encrypt} from "../../../encrypt";
 
 export function Login() {
@@ -46,9 +46,7 @@ export function Login() {
                 try {
                     let temp = response.data
                     setToken(elem => [token.push(temp)]);
-                    console.log(temp);
                     localStorage.setItem('token', JSON.stringify(temp));
-                    getAllEnterprises();
                     localStorage.setItem('userMail', mail);
                     localStorage.setItem('logged', JSON.stringify(true));
                 } catch (e) {
