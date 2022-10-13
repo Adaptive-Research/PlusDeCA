@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Footer, Sidebar, EnterpriseTable} from "../components";
+import {Footer, Sidebar} from "../components";
 
 import Table from 'react-bootstrap/Table';
 import './home.css';
@@ -64,12 +64,11 @@ export default function HomePage() {
                 </div>
 
 
-
                 <Footer/>
             </div>);
 
     } else {
-        return <div>pas de data </div>;
+        return <div> Loading or not logged in ?</div>;
     }
 
 
